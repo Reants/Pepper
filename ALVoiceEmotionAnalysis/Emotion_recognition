@@ -1,0 +1,46 @@
+#! /usr/bin/env python
+# -- encoding: UTF-8 --
+
+import qi
+import time
+
+# Establece la sesión y conecta con el robot
+session = qi.Session()
+session.connect("tcp://127.0.0.1:9559")
+
+# Inicializa los servicios
+emotion_analysis_service = session.service("ALVoiceEmotionAnalysis")
+memory_service = session.service("ALMemory")
+animated_speech_service = session.service("ALAnimatedSpeech")
+
+# Suscribe al análisis de emoción en la voz
+emotion_analysis_service.subscribe("EmocionDeVoz")
+
+try:
+    while True:
+        print("Escuchando emoción en la voz...")
+        
+        # Obtén el evento `EmotionRecognized` desde ALMemory
+        emotion_data = memory_service.getData("ALVoiceEmotionAnalysis/EmotionRecognized")
+        
+        if emotion_data:
+            matched_emotion_index = emotion_data[0][0]  # Índice de la emoción dominante
+            matched_emotion_level = emotion_data[0][1]  # Nivel de la emoción dominante
+            
+            # Imprime la emoción detectada y el nivel
+            print("Emoción detectada (índice): {}, nivel: {}".format(matched_emotion_index, matched_emotion_level))
+            
+            # Responde en función de la emoción dominante
+            if matched_emotion_index == 3:  # Joy
+                animated_speech_service.say("Parece que estás muy alegre, ¡me alegra escucharlo!")
+            elif matched_emotion_index == 4:  # Sorrow
+                animated_speech_service.say("Lamento que estés triste. Estoy aquí para animarte.")
+        
+        # Espera un poco antes de analizar nuevamente
+        time.sleep(3)
+
+except KeyboardInterrupt:
+    # Desuscribe en caso de interrupción (CTRL+C)
+    emotion_analysis_service.unsubscribe("EmocionDeVoz")
+    print("Suscripción finalizada.")
+
