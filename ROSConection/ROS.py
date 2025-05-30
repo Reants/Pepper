@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+#This is with ROS noetic
+
 import qi
 import rospy
 
@@ -16,7 +18,7 @@ def connect_and_speak():
     rospy.loginfo("Iniciando nodo de emociones")
     try:
         print("Conectado correctamente")
-        speech.say(" C o n e x i n exitosa, ahora puedo hablar contigo.")
+        speech.say(" Conexion exitosa, ahora puedo hablar contigo.")
     except:
         print("Error al conectar con Pepper")
 if __name__ == "__main__":
