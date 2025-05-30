@@ -4,7 +4,8 @@ import qi
 import rospy
 
 session = qi.Session()
-session.connect("tcp://192.168.0.102:9559")
+ip = 192.168.0.102
+session.connect("tcp://" + ip +":9559")
 
 speech = session.service("ALAnimatedSpeech")
 photo = session.service("ALPhotoCapture")
