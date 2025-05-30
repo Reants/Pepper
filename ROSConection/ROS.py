@@ -6,7 +6,7 @@ import qi
 import rospy
 
 session = qi.Session()
-ip = 192.168.0.102
+ip = "192.168.0.102"
 session.connect("tcp://" + ip +":9559")
 
 speech = session.service("ALAnimatedSpeech")
@@ -14,7 +14,7 @@ photo = session.service("ALPhotoCapture")
 memory_service = session.service("ALMemory")
     
 def connect_and_speak():
-    rospy.init_node("Emotion_recognition")
+    rospy.init_node("Name_node")
     rospy.loginfo("Iniciando nodo de emociones")
     try:
         print("Conectado correctamente")
