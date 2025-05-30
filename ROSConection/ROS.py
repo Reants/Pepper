@@ -9,11 +9,6 @@ session.connect("tcp://192.168.0.102:9559")
 speech = session.service("ALAnimatedSpeech")
 photo = session.service("ALPhotoCapture")
 memory_service = session.service("ALMemory")
-
-def pituare():
-    photo.setResolution(2)
-    photo.setPictureFormat("jpg")
-    photo.takePicture("/home/nao/TesisEmociones", "IC")
     
 def connect_and_speak():
     rospy.init_node("Emotion_recognition")
