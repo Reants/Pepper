@@ -1,2 +1,3 @@
 # Pepper
-In this repository, I'm going to work with the social robot Pepper using Naoqi. I will explore the APIs and use them to create different, simple projects that can be implemented on the robot.
+This repository contains projects developed for the social robot Pepper using the Naoqi framework. The implementations demonstrate practical applications of the Naoqi APIs for robot interaction, behavior, and data processing.
+ 
